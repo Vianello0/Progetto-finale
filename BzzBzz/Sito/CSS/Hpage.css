@@ -1,0 +1,75 @@
+body{
+    margin:0;
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(ellipse 60% 50% at 20% 20%, rgba(200,169,110,.08) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(200,169,110,.05) 0%, transparent 60%);
+    height: 100vh;
+    font-family: Century Gothic;
+}
+
+:root {
+    --bg:      #0d0d0f;
+}
+
+#wel{
+    margin: 40px;
+    width: 50%; 
+    height: auto;
+    background-color: rgba(51,51,51,0.8);
+    position:static;
+    margin-top: 10%;
+    margin-left: 25%;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#welcome{
+    color: white;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+#sub{
+    color: white;
+    text-align: center;
+}
+
+#rett{
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    margin: 40px;
+    width: 25%;
+    height: 45%;
+    background-color: rgba(51,51,51,0.8);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    float:left;
+}
+
+
+.slideshow-container {
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+    overflow: hidden;
+}
+
+/* Controlla che sia scritto esattamente così */
+#fading-image {
+    opacity: 1;
+    transition: opacity 1s ease-in-out; /* Se manca questo, il cambio è istantaneo */
+}
+
+.fade-out {
+    opacity: 0 !important; /* L'important assicura che vinca su altri stili */
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}

@@ -1,0 +1,144 @@
+.catalog-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.catalog-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.catalog-header h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.catalog-header p {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+.vespa-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.vespa-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+}
+
+.vespa-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.vespa-info {
+    padding: 25px;
+    flex-grow: 1;
+}
+
+.vespa-model {
+    font-size: 1.5rem;
+    color: #222;
+    margin: 0 0 15px 0;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+.vespa-details {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+.vespa-details li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.vespa-details li strong {
+    color: #333;
+}
+
+.vespa-actions {
+    background: #f8f9fa;
+    padding: 15px 25px;
+    border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.vespa-actions .action-text {
+    font-size: 0.9rem;
+    color: #444;
+    font-weight: 500;
+}
+
+/* Custom Checkbox */
+.checkbox-wrapper {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.checkbox-wrapper input {
+    display: none;
+}
+
+.checkmark {
+    width: 24px;
+    height: 24px;
+    background-color: #e9ecef;
+    border-radius: 6px;
+    border: 2px solid #ced4da;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.checkbox-wrapper input:checked + .checkmark {
+    background-color: #4caf50;
+    border-color: #4caf50;
+}
+
+.checkmark::after {
+    content: '';
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    display: none;
+}
+
+.checkbox-wrapper input:checked + .checkmark::after {
+    display: block;
+}
+
+.checkbox-wrapper:hover input:not(:checked) + .checkmark {
+    border-color: #adb5bd;
+}
+
+.login-prompt {
+    font-size: 0.85rem;
+    color: #888;
+    font-style: italic;
+    text-align: center;
+    width: 100%;
+}
