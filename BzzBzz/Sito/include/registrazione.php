@@ -7,17 +7,12 @@ require_once 'dbHandler.php';
 
 header('Content-Type: application/json; charset=utf-8');
 
-/* ─────────────────────────────────────────────
-   1. Verifica metodo HTTP
-───────────────────────────────────────────── */
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     die(json_encode(['success' => false, 'message' => 'Metodo non consentito.']));
 }
 
-/* ─────────────────────────────────────────────
-   2. Raccolta e validazione input
-───────────────────────────────────────────── */
 $campi = ['nome', 'cognome', 'mail', 'dataNascita', 'passwordUt', 'via', 'cap', 'citta', 'provincia'];
 
 $dati = [];
@@ -30,7 +25,7 @@ foreach ($campi as $campo) {
     $dati[$campo] = $valore;
 }
 
-// Validazione email (max 30 caratteri come da schema)
+// Validazione email (max 30 caratteri)
 if (!filter_var($dati['mail'], FILTER_VALIDATE_EMAIL)) {
     http_response_code(400);
     die(json_encode(['success' => false, 'message' => 'Indirizzo email non valido.']));
@@ -40,7 +35,7 @@ if (mb_strlen($dati['mail']) > 30) {
     die(json_encode(['success' => false, 'message' => 'Email troppo lunga (max 30 caratteri).']));
 }
 
-// Validazione lunghezze secondo schema
+// Validazione lunghezze
 $limiti = [
     'nome'      => 15,
     'cognome'   => 20,
@@ -70,9 +65,7 @@ if (!preg_match('/^\d{1,5}$/', $dati['cap'])) {
 // NOTA: richiede PasswordUt VARCHAR(60) — vedi schema_bzzbzz.sql
 $passwordHash = password_hash($dati['passwordUt'], PASSWORD_BCRYPT);
 
-/* ─────────────────────────────────────────────
-   3. Salvataggio nel database (transazione)
-───────────────────────────────────────────── */
+
 try {
     $pdo = DBHandler::getConnection();
     $pdo->beginTransaction();
@@ -111,8 +104,8 @@ try {
     $stmtResidenza->execute([
         ':idWasper'  => $idWasper,
         ':via'       => $dati['via'],
-        ':cap'       => (int) $dati['cap'],   // INT(5) nel DB
-        ':citta'     => $dati['citta'],        // mappa al campo Città nel DB
+        ':cap'       => (int) $dati['cap'],
+        ':citta'     => $dati['citta'],
         ':provincia' => $dati['provincia'],
     ]);
 

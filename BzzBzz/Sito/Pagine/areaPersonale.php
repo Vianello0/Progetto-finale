@@ -1,6 +1,5 @@
 <?php
-// Includiamo l'header che fa anche partire la sessione
-include_once '../header_footer/HeaderUser.php';
+
 
 // Sicurezza nel caso session_start non fosse scattato
 if (session_status() === PHP_SESSION_NONE) {
@@ -63,8 +62,8 @@ if (isset($_SESSION['IDWasper'])) {
                     <div class="user-vespas-list" style="margin-bottom: 20px; text-align: left;">
                         <ul style="list-style-type: none; padding: 0;">
                             <?php foreach ($userVespas as $modello): ?>
-                                <li style="background: #f8f9fa; margin-bottom: 10px; padding: 12px 15px; border-radius: 8px; border-left: 4px solid #333; font-weight: 500; font-size: 1.1rem; display: flex; align-items: center;">
-                                    <span style="margin-right: 10px;">🛵</span> <?= htmlspecialchars($modello) ?>
+                                <li>
+                                    <span style="margin-right: 10px;"></span> <?= htmlspecialchars($modello) ?>
                                 </li>
                             <?php endforeach; ?>
                         </ul>

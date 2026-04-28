@@ -1,7 +1,7 @@
 {
     "name": "website pages",
-    "userpages": ["hPage.php", "fotoRaduni.php", "modelliVespe.php"],
+    "userpages": ["hPage.php", "fotoRaduni.php", "modelliVespe.php", "catalogoVespa.php"],
     "adminpages": ["insertProducts.php", "insertShops.php", "refunds.php"],
-    "loggedInPages": ["gadgetShop.php", "ricambiShop.php", "areaPersonale.php"],
-    "DBPages": ["register.php", "loginForm.php", "gadgetShop.php", "ricambiShop.php", "areaPersonale.php"]
+    "loggedInPages": ["gadgetShop.php", "ShopRicambi.php", "areaPersonale.php"],
+    "DBPages": ["register.php", "loginForm.php", "gadgetShop.php", "ShopRicambi.php", "areaPersonale.php"]
 }

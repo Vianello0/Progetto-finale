@@ -15,6 +15,13 @@ $obj = json_decode($json);
 
 // in_array(el, arr) checks if el is in array arr
 if(in_array($pageName, $obj->loggedInPages)){
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    if (!isset($_SESSION['IDWasper'])) {
+        header("Location: loginForm.php");
+        exit();
+    }
     include '../header_footer/HeaderUser.php';
 }
 

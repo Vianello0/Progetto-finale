@@ -1,75 +1,132 @@
-body{
-    margin:0;
+:root {
+    --bg:      #0d0d0f;
+    --surface: #16161a;
+    --border:  #2a2a30;
+    --neon:    #c8a96e;
+    --neon2:   #e8c98e;
+    --text:    #e8e6e0;
+    --text2:   #7a7870;
+    --radius:  12px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
     background-color: var(--bg);
     background-image:
         radial-gradient(ellipse 60% 50% at 20% 20%, rgba(200,169,110,.08) 0%, transparent 60%),
         radial-gradient(ellipse 40% 40% at 80% 80%, rgba(200,169,110,.05) 0%, transparent 60%);
-    height: 100vh;
-    font-family: Century Gothic;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text);
+    min-height: 100vh;
 }
 
-:root {
-    --bg:      #0d0d0f;
+.home-container {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 1.5rem;
+    animation: fadeUp .5s ease both;
 }
 
-#wel{
-    margin: 40px;
-    width: 50%; 
-    height: auto;
-    background-color: rgba(51,51,51,0.8);
-    position:static;
-    margin-top: 10%;
-    margin-left: 25%;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
-#welcome{
-    color: white;
+.hero-section {
     text-align: center;
-    font-size: 50px;
-    font-weight: bold;
+    margin-bottom: 4rem;
 }
 
-#sub{
-    color: white;
+.hero-section h1 {
+    font-family: 'Century Gothic', 'Segoe UI', sans-serif;
+    font-size: 3rem;
+    font-weight: 400;
+    color: var(--neon);
+    letter-spacing: -.01em;
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+    color: var(--text2);
+    margin: 0;
+}
+
+.home-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.nav-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) * 1.5);
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+}
+
+.nav-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(200, 169, 110, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.card-content {
+    padding: 1.5rem;
     text-align: center;
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid var(--border);
+    z-index: 2;
 }
 
-#rett{
-    text-align: center;
-    font-size: 40px;
-    font-weight: bold;
-    margin: 40px;
-    width: 25%;
-    height: 45%;
-    background-color: rgba(51,51,51,0.8);
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    float:left;
+.card-content h2 {
+    font-family: 'Century Gothic', 'Segoe UI', sans-serif;
+    font-size: 1.5rem;
+    color: var(--text);
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    transition: color 0.3s;
 }
 
+.nav-card:hover .card-content h2 {
+    color: var(--neon);
+}
 
 .slideshow-container {
     width: 100%;
-    height: 100%;
-    max-width: 600px;
+    flex-grow: 1;
     overflow: hidden;
+    position: relative;
+    background: #000;
 }
 
-/* Controlla che sia scritto esattamente così */
-#fading-image {
+.slideshow-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+    transition: opacity 1s ease-in-out, transform 0.5s ease;
+}
+
+.nav-card:hover .slideshow-container img {
     opacity: 1;
-    transition: opacity 1s ease-in-out; /* Se manca questo, il cambio è istantaneo */
+    transform: scale(1.05);
+}
+
+/* JS classes */
+#fading-image {
+    opacity: 0.7;
 }
 
 .fade-out {
-    opacity: 0 !important; /* L'important assicura che vinca su altri stili */
-}
-
-a{
-    text-decoration: none;
-    color: white;
+    opacity: 0 !important;
 }

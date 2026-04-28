@@ -32,7 +32,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <li class="has-submenu">
                     <span class="nopage">SHOP</span>
                     <ul class="submenu">
-                        <li><a href="ricambiShop.html">Ricambi</a></li>
+                        <li><a href="ShopRicambi.php">Ricambi</a></li>
                         <li><a href="gadgetShop.php">Abbigliamento</a></li>
                     </ul>
                 </li>

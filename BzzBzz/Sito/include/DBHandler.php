@@ -44,9 +44,7 @@ class DBHandler {
         return self::$connection;
     }
 
-    /**
-     * Chiude esplicitamente la connessione.
-     */
+    // Chiude la connessione.
     public static function closeConnection(): void {
         self::$connection = null;
     }

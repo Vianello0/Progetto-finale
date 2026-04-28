@@ -37,7 +37,7 @@
         </div>
     <?php endif; ?>
 
-    <form method="POST" action="../include/login.php" novalidate>
+    <form method="POST" action="">
 
         <div class="field">
             <label for="mail">Email</label>

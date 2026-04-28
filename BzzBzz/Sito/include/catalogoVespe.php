@@ -1,12 +1,11 @@
 <?php
 require_once __DIR__ . '/DBHandler.php';
 
-// Sicurezza nel caso session_start non fosse scattato
+// se session_start non fosse scattato
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Fetch all Vespas
 $db = DBHandler::getConnection();
 $stmt = $db->query("SELECT * FROM Vespa ORDER BY Modello ASC");
 $vespas = $stmt->fetchAll();

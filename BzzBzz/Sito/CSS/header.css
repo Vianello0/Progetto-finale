@@ -136,3 +136,23 @@ a{
     color: white;
     font-family: Century Gothic;
 }
+
+@media (max-width: 768px) {
+    #main-header {
+        height: auto;
+        padding: 15px 0;
+    }
+    .header-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .menu ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
+    }
+    .header-actions {
+        margin-top: 5px;
+    }
+}

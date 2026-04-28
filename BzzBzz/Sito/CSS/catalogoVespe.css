@@ -1,83 +1,120 @@
+:root {
+    --bg:      #0d0d0f;
+    --surface: #16161a;
+    --border:  #2a2a30;
+    --neon:    #c8a96e;
+    --neon2:   #e8c98e;
+    --text:    #e8e6e0;
+    --text2:   #7a7870;
+    --radius:  12px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(ellipse 60% 50% at 20% 20%, rgba(200,169,110,.08) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(200,169,110,.05) 0%, transparent 60%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+}
+
 .catalog-container {
     max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 20px;
-    font-family: 'Inter', sans-serif;
+    margin: 4rem auto;
+    padding: 0 1.5rem;
+    animation: fadeUp .5s ease both;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 .catalog-header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 3rem;
 }
 
 .catalog-header h1 {
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 10px;
+    font-family: 'Century Gothic', 'Segoe UI', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: var(--text);
+    letter-spacing: -.01em;
+    margin: 0 0 10px 0;
 }
 
 .catalog-header p {
-    font-size: 1.1rem;
-    color: #666;
+    font-size: 0.95rem;
+    color: var(--text2);
+    margin: 0;
 }
 
 .vespa-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
+    gap: 2rem;
 }
 
 .vespa-card {
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) * 1.5);
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid #eee;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
 }
 
 .vespa-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-color: rgba(200, 169, 110, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 .vespa-info {
-    padding: 25px;
+    padding: 2rem;
     flex-grow: 1;
 }
 
 .vespa-model {
+    font-family: 'Century Gothic', 'Segoe UI', sans-serif;
     font-size: 1.5rem;
-    color: #222;
-    margin: 0 0 15px 0;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 10px;
+    color: var(--neon);
+    margin: 0 0 1.5rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .vespa-details {
     list-style: none;
     padding: 0;
-    margin: 0 0 20px 0;
+    margin: 0;
 }
 
 .vespa-details li {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 8px;
-    color: #555;
+    margin-bottom: 0.8rem;
+    color: var(--text2);
     font-size: 0.95rem;
 }
 
 .vespa-details li strong {
-    color: #333;
+    color: var(--text);
+    font-weight: 500;
 }
 
 .vespa-actions {
-    background: #f8f9fa;
-    padding: 15px 25px;
-    border-top: 1px solid #eee;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 1.5rem 2rem;
+    border-top: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -85,7 +122,7 @@
 
 .vespa-actions .action-text {
     font-size: 0.9rem;
-    color: #444;
+    color: var(--text);
     font-weight: 500;
 }
 
@@ -103,9 +140,9 @@
 .checkmark {
     width: 24px;
     height: 24px;
-    background-color: #e9ecef;
+    background-color: transparent;
     border-radius: 6px;
-    border: 2px solid #ced4da;
+    border: 2px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -113,15 +150,15 @@
 }
 
 .checkbox-wrapper input:checked + .checkmark {
-    background-color: #4caf50;
-    border-color: #4caf50;
+    background-color: var(--neon);
+    border-color: var(--neon);
 }
 
 .checkmark::after {
     content: '';
     width: 6px;
     height: 12px;
-    border: solid white;
+    border: solid #0d0d0f;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
     display: none;
@@ -132,13 +169,25 @@
 }
 
 .checkbox-wrapper:hover input:not(:checked) + .checkmark {
-    border-color: #adb5bd;
+    border-color: rgba(200, 169, 110, 0.5);
 }
 
 .login-prompt {
     font-size: 0.85rem;
-    color: #888;
+    color: var(--text2);
     font-style: italic;
     text-align: center;
     width: 100%;
+    margin: 0;
+}
+
+.login-prompt a {
+    color: var(--neon);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.login-prompt a:hover {
+    color: var(--neon2);
 }

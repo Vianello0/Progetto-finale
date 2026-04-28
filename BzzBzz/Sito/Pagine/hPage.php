@@ -1,45 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../CSS/Hpage.css">
-    <link rel="icon" type="image/x-icon" href="../Img/loghi/Logo.png">
-        <script src="../JS/imgScroll.js" defer></script>
+<?php
+require_once '../header_footer/HeaderUser.php';
+?>
 
-    <title>BzzBzz</title>
-</head>
-<body>
-    <div id="wel">
-        <div id="welcome">Benvenuto su BzzBzz</div>
-        <div id="sub">La più grande community di vespisti d'Italia</div>
+<link rel="stylesheet" href="../CSS/Hpage.css">
+<script src="../JS/imgScroll.js" defer></script>
+<title>BzzBzz - Home</title>
+
+<div class="home-container">
+    <div class="hero-section">
+        <h1>Benvenuto su BzzBzz</h1>
+        <p>La più grande community di vespisti d'Italia</p>
     </div>
-<a  href="catalogoVespa.php">
-        <div id="rett">
-            GUARDA I MODELLI
-            <div class="slideshow-container">
-    <img id="fading-image" src="../Img/Vespe/50.jpg" alt="Slideshow">
-        </div>
-        </div>
-    </a>
 
-<a  href="fotoRaduni.html">
-        <div id="rett">
-            FOTO RADUNI
+    <div class="home-grid">
+        <a href="catalogoVespa.php" class="nav-card">
+            <div class="card-content">
+                <h2>GUARDA I MODELLI</h2>
+            </div>
             <div class="slideshow-container">
-    <img id="fading-image" src="../Img/Vespe/50.jpg" alt="Slideshow">
-        </div>
-        </div>
-    </a>
+                <img id="fading-image" src="../Img/Vespe/50.jpg" alt="Modelli Vespa">
+            </div>
+        </a>
 
-    <a  href="gadgetShop.html">
-        <div id="rett">
-             GADGET SHOP
+        <a href="fotoRaduni.php" class="nav-card">
+            <div class="card-content">
+                <h2>FOTO RADUNI</h2>
+            </div>
             <div class="slideshow-container">
-    <img id="fading-image" src="../Img/Vespe/50.jpg" alt="Slideshow">
-        </div>
-        </div>
-    </a>
-    
+                <img src="../Img/Vespe/50special.jpg" alt="Foto Raduni">
+            </div>
+        </a>
+
+        <a href="gadgetShop.php" class="nav-card">
+            <div class="card-content">
+                <h2>GADGET SHOP</h2>
+            </div>
+            <div class="slideshow-container">
+                <img src="../Img/Vespe/pk125.jpg" alt="Gadget Shop">
+            </div>
+        </a>
+    </div>
+</div>
+
 </body>
 </html>

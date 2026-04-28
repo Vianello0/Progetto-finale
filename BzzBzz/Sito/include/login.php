@@ -20,11 +20,7 @@ if (session_status() === PHP_SESSION_NONE) {
 $error   = '';
 $success = '';
 
-/* ─────────────────────────────────────────────
-   Elaborazione solo se il form è stato inviato
-───────────────────────────────────────────── */
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    // GET: pagina aperta normalmente, non fare nulla
     return;
 }
 
