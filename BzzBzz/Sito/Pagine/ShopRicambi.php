@@ -76,7 +76,11 @@ require_once '../header_footer/HeaderUser.php';
                             </div>
                             <div class="ricambio-actions">
                                 <div class="prezzo">€ <?= number_format($ricambio['Prezzo'], 2, ',', '.') ?></div>
-                                <button class="btn-buy">Aggiungi</button>
+                                <?php if (isset($_SESSION['IDWasper'])): ?>
+                                    <button class="btn-buy" data-id="<?= $ricambio['IDRicambio'] ?>">Aggiungi</button>
+                                <?php else: ?>
+                                    <button class="btn-buy" onclick="window.location.href='loginForm.php'">Accedi per Acquistare</button>
+                                <?php endif; ?>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -85,6 +89,57 @@ require_once '../header_footer/HeaderUser.php';
         </main>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const buyButtons = document.querySelectorAll('.btn-buy[data-id]');
+    
+    buyButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const idRicambio = this.getAttribute('data-id');
+            const originalText = this.textContent;
+            
+            // UI Feedback
+            this.textContent = 'Aggiungendo...';
+            this.disabled = true;
+            
+            const formData = new FormData();
+            formData.append('action', 'add');
+            formData.append('idRicambio', idRicambio);
+            
+            fetch('../include/acquisti.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    this.textContent = 'Aggiunto!';
+                    this.style.backgroundColor = 'var(--neon)';
+                    this.style.color = '#0d0d0f';
+                    
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.style.backgroundColor = 'transparent';
+                        this.style.color = 'var(--neon)';
+                        this.disabled = false;
+                    }, 2000);
+                } else {
+                    alert(data.message);
+                    this.textContent = originalText;
+                    this.disabled = false;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Errore di connessione.');
+                this.textContent = originalText;
+                this.disabled = false;
+            });
+        });
+    });
+});
+</script>
 
 </body>
 </html>

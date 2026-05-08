@@ -104,6 +104,15 @@ INSERT INTO RicambioVespa (IDRicambio, Modello) VALUES
 (19, 'Vespa PX 150'), (19, 'Vespa 125 ET3'), (19, 'Vespa 150 Sprint'),
 (20, 'Vespa 125 ET3'), (20, 'Vespa Primavera 125');
 
+CREATE TABLE if NOT Exists Acquisti(
+    IDWasper INT NOT NULL,
+    IDRicambio INT NOT NULL,
+    Numero INT,
+    PRIMARY KEY(IDWasper, IDRicambio),
+    FOREIGN KEY(IDWasper) REFERENCES Wasper(IDWasper),
+    FOREIGN KEY(IDRicambio) REFERENCES PezziRicambio(IDRicambio)
+);
+
 CREATE Table Gadget if NOT Exists(
     IDGadget INT auto increment not null,
     Nome VARCHAR(20) NOT NULL,
@@ -114,18 +123,9 @@ CREATE Table Gadget if NOT Exists(
     PRIMARY KEY(IDGadget)
 );
 
-/*CREATE TABLE acquisti if NOT Exists(
-    IDAcquisto INT auto increment not null,
-    IDWasper INT NOT NULL,
-    IDGadget INT,
-    IDRicambio INT,
-    DataAcquisto DATE NOT NULL,
-    PRIMARY KEY(IDAcquisto),
-    FOREIGN KEY(IDWasper) REFERENCES Wasper(IDWasper),
-    FOREIGN KEY(IDGadget) REFERENCES Gadget(IDGadget),
-    FOREIGN KEY(IDRicambio) REFERENCES PezziRicambio(IDRicambio)
-);
-*/
+
+
+
 CREATE Table ModuloIScrizione(
     NomeRaduno VARCHAR(20) NOT NULL,
     IDWasper INT NOT NULL,
