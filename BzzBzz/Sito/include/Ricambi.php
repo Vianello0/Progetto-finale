@@ -4,31 +4,33 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+require_once('../include/DBHandler.php');
+
 $db = DBHandler::getConnection();
 
-// Fetch types for filter
+// Fetch types per filtro (distinct per non ripetere i tipi)
 $stmtTipi = $db->query("SELECT DISTINCT Tipo FROM PezziRicambio ORDER BY Tipo ASC");
 $tipi = $stmtTipi->fetchAll(PDO::FETCH_COLUMN);
 
-// Fetch models for filter
+// Fetch models per filtro
 $stmtModelli = $db->query("SELECT Modello FROM Vespa ORDER BY Modello ASC");
 $modelli = $stmtModelli->fetchAll(PDO::FETCH_COLUMN);
 
-// Retrieve GET filters
+//prendi i filtri
 $selectedTipo = $_GET['tipo'] ?? '';
 $selectedOrdine = $_GET['ordine'] ?? '';
 $selectedModelli = $_GET['modelli'] ?? [];
 
-// Base query for spare parts
+//mostra un solo risultato, selezionando tutte le colonne (pr è un alias di PezziRicambio.NomeColonna)
 $query = "SELECT DISTINCT pr.* FROM PezziRicambio pr ";
 $params = [];
 $whereClauses = [];
 
-// Join RicambioVespa if models are selected
+// Join RicambioVespa se i modelli sono selezionati
 if (!empty($selectedModelli)) {
     $query .= " JOIN RicambioVespa rv ON pr.IDRicambio = rv.IDRicambio ";
     
-    // Create placeholders for the IN clause
+    // placeholder per la clausola IN
     $inPlaceholders = [];
     foreach ($selectedModelli as $index => $modello) {
         $paramName = "modello_" . $index;
@@ -47,7 +49,8 @@ if (!empty($selectedTipo)) {
 }
 
 if (!empty($whereClauses)) {
-    $query .= " WHERE " . implode(" AND ", $whereClauses);
+    $query .= " WHERE " . implode(" AND ", $whereClauses); //.= unisce a una stringa
+    // implode unisce gli elementi di un array in una stringa aggiungendoci AND
 }
 
 if ($selectedOrdine === 'asc') {

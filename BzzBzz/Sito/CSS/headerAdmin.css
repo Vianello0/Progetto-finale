@@ -1,0 +1,110 @@
+/* headerAdmin.css */
+:root {
+    --admin-bg: #1a1a1d;
+    --admin-navbar: #111113;
+    --admin-accent: #f39c12; /* Orange accent for admin */
+    --admin-accent-hover: #e67e22;
+    --admin-text: #e0e0e0;
+    --admin-danger: #e74c3c;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--admin-bg);
+    color: var(--admin-text);
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    height: 70px;
+    background-color: var(--admin-navbar);
+    border-bottom: 2px solid var(--admin-accent);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.admin-logo a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.admin-logo span {
+    color: var(--admin-accent);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-left: 5px;
+    background: rgba(243, 156, 18, 0.1);
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.admin-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.admin-nav a {
+    text-decoration: none;
+    color: #a0a0a0;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+    padding: 10px 5px;
+}
+
+.admin-nav a:hover,
+.admin-nav a.active {
+    color: var(--admin-accent);
+}
+
+.admin-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.admin-greeting {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.btn-logout {
+    text-decoration: none;
+    background-color: var(--admin-danger);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-logout:hover {
+    background-color: #c0392b;
+}
+
+@media (max-width: 768px) {
+    .admin-header {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    .admin-nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}

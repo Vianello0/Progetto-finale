@@ -1,15 +1,12 @@
 <?php
-// registrazione.php — Gestione registrazione Wasper + Residenza
-
-declare(strict_types=1);
 
 require_once 'dbHandler.php';
 
-header('Content-Type: application/json; charset=utf-8');
+header('Content-Type: application/json; charset=utf-8');//fa sì che la pagina mandi json al client
 
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
+    http_response_code(405);//inica metodo non consentito
     die(json_encode(['success' => false, 'message' => 'Metodo non consentito.']));
 }
 
@@ -19,23 +16,23 @@ $dati = [];
 foreach ($campi as $campo) {
     $valore = trim($_POST[$campo] ?? '');
     if ($valore === '') {
-        http_response_code(400);
+        http_response_code(400);//campi vuoti
         die(json_encode(['success' => false, 'message' => "Il campo «{$campo}» è obbligatorio."]));
     }
     $dati[$campo] = $valore;
 }
 
-// Validazione email (max 30 caratteri)
+// validazione email (max 30 caratteri)
 if (!filter_var($dati['mail'], FILTER_VALIDATE_EMAIL)) {
     http_response_code(400);
     die(json_encode(['success' => false, 'message' => 'Indirizzo email non valido.']));
 }
-if (mb_strlen($dati['mail']) > 30) {
+if (mb_strlen($dati['mail']) > 30) {//mbstrlen conta i caratteri non i byte (es emoji sono più byte)
     http_response_code(400);
     die(json_encode(['success' => false, 'message' => 'Email troppo lunga (max 30 caratteri).']));
 }
 
-// Validazione lunghezze
+// validazione lunghezze
 $limiti = [
     'nome'      => 15,
     'cognome'   => 20,
@@ -49,20 +46,20 @@ foreach ($limiti as $campo => $max) {
     }
 }
 
-// Validazione data di nascita
-if (!DateTimeImmutable::createFromFormat('Y-m-d', $dati['dataNascita'])) {
+// validazione data di nascita
+if (!DateTimeImmutable::createFromFormat('Y-m-d', $dati['dataNascita'])) {//verifica formato data
     http_response_code(400);
     die(json_encode(['success' => false, 'message' => 'Formato data non valido (atteso: YYYY-MM-DD).']));
 }
 
-// Validazione CAP (solo numeri, max 5 cifre)
+// validazione CAP (solo numeri, max 5 cifre)
+//^\d{1,5}$ significa: deve iniziare con un numero (\d), deve avere tra 1 e 5 cifre ({1,5}) e deve finire con un numero
 if (!preg_match('/^\d{1,5}$/', $dati['cap'])) {
     http_response_code(400);
     die(json_encode(['success' => false, 'message' => 'CAP non valido (massimo 5 cifre numeriche).']));
 }
 
 // Hashing della password con bcrypt
-// NOTA: richiede PasswordUt VARCHAR(60) — vedi schema_bzzbzz.sql
 $passwordHash = password_hash($dati['passwordUt'], PASSWORD_BCRYPT);
 
 
@@ -70,7 +67,7 @@ try {
     $pdo = DBHandler::getConnection();
     $pdo->beginTransaction();
 
-    // ── 3a. Controlla se la mail è già presente ──
+    // controlla se la mail è già presente
     $stmtCheck = $pdo->prepare('SELECT IDWasper FROM Wasper WHERE Mail = :mail LIMIT 1');
     $stmtCheck->execute([':mail' => $dati['mail']]);
     if ($stmtCheck->fetch()) {
@@ -79,7 +76,7 @@ try {
         die(json_encode(['success' => false, 'message' => 'Questa email è già registrata.']));
     }
 
-    // ── 3b. Inserimento in Wasper ──
+    // inserimento in Wasper
     $sqlWasper = '
         INSERT INTO Wasper (Nome, Cognome, Mail, DataNascita, PasswordUt)
         VALUES (:nome, :cognome, :mail, :dataNascita, :passwordUt)
@@ -95,7 +92,7 @@ try {
 
     $idWasper = (int) $pdo->lastInsertId(); // IDWasper auto_increment
 
-    // ── 3c. Inserimento in Residenza con l'IDWasper appena creato ──
+    // inserimento in Residenza con l'IDWasper appena creato
     $sqlResidenza = '
         INSERT INTO Residenza (IDWasper, Via, CAP, Città, Provincia)
         VALUES (:idWasper, :via, :cap, :citta, :provincia)
@@ -111,7 +108,7 @@ try {
 
     $pdo->commit();
 
-    http_response_code(201);
+    http_response_code(201);//richiesta andata a buon fine
     echo json_encode([
         'success'  => true,
         'message'  => 'Registrazione completata con successo.',
@@ -122,7 +119,5 @@ try {
     if ($pdo->inTransaction()) {
         $pdo->rollBack();
     }
-    error_log('[registrazione] Errore DB: ' . $e->getMessage());
-    http_response_code(500);
     echo json_encode(['success' => false, 'message' => 'Errore durante la registrazione.']);
 }

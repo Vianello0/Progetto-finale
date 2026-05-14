@@ -13,9 +13,7 @@ class DBHandler {
     // Impedisce l'istanziazione diretta (Singleton)
     private function __construct() {}
 
-    /**
-     * Restituisce l'unica istanza PDO (Singleton).
-     */
+    //Restituisce l'unica istanza PDO (Singleton).
     public static function getConnection(): PDO {
         if (self::$connection === null) {
             $dsn = sprintf(
@@ -34,9 +32,6 @@ class DBHandler {
             try {
                 self::$connection = new PDO($dsn, self::DB_USER, self::DB_PASSWORD, $options);
             } catch (PDOException $e) {
-                // In produzione evita di mostrare dettagli dell'errore
-                error_log('[DBHandler] Connessione fallita: ' . $e->getMessage());
-                http_response_code(500);
                 die(json_encode(['success' => false, 'message' => 'Errore interno del server.']));
             }
         }

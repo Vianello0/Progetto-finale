@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/DBHandler.php';
+require_once '../include/DBHandler.php';
 
 // se session_start non fosse scattato
 if (session_status() === PHP_SESSION_NONE) {
@@ -18,5 +18,5 @@ if ($isLoggedIn) {
     $stmtUser = $db->prepare("SELECT Modello FROM vespeWasper WHERE IDWasper = :id");
     $stmtUser->execute(['id' => $_SESSION['IDWasper']]);
     $owned = $stmtUser->fetchAll(PDO::FETCH_COLUMN);
-    $userVespas = array_fill_keys($owned, true);
+    $userVespas = array_fill_keys($owned, true); //assegna alla chiave modello nell'array il valore true
 }

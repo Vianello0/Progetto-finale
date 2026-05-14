@@ -113,44 +113,26 @@ CREATE TABLE if NOT Exists Acquisti(
     FOREIGN KEY(IDRicambio) REFERENCES PezziRicambio(IDRicambio)
 );
 
-CREATE Table Gadget if NOT Exists(
-    IDGadget INT auto increment not null,
-    Nome VARCHAR(20) NOT NULL,
-    Categoria VARCHAR(20) NOT NULL,
-    Taglia VARCHAR(10),
-    Descrizione VARCHAR(50) NOT NULL,
-    Prezzo DECIMAL(5,2) NOT NULL,
-    PRIMARY KEY(IDGadget)
-);
 
 
-
-
-CREATE Table ModuloIScrizione(
+CREATE Table if NOT Exists Raduno(
     NomeRaduno VARCHAR(20) NOT NULL,
-    IDWasper INT NOT NULL,
-    Descrizione VARCHAR(50) NOT NULL,
-    ModelloVespa VARCHAR(20) NOT NULL,
-    Privacy BOOLEAN NOT NULL,
-    PRIMARY KEY(NomeRaduno),
-    FOREIGN KEY(IDWasper) REFERENCES Wasper(IDWasper)
-);
-
-CREATE TABLE RaduniPassati if NOT Exists(
-    NomeRaduno VARCHAR(20) NOT NULL,
+    Descrizione VARCHAR(255) NOT NULL,
     DataRaduno DATE NOT NULL,
-    Luogo VARCHAR(30) NOT NULL,
-    Descrizione VARCHAR(50) NOT NULL,
+    Luogo VARCHAR(50) NOT NULL,
     PRIMARY KEY(NomeRaduno)
 );
 
-CREATE TABLE FotoRaduni if NOT Exists(
-    IDFoto INT auto increment not null,
+CREATE table if NOT Exists Partecipanti (
     NomeRaduno VARCHAR(20) NOT NULL,
-    Foto VARCHAR(100) NOT NULL,
-    PRIMARY KEY(IDFoto),
-    FOREIGN KEY(NomeRaduno) REFERENCES RaduniPassati(NomeRaduno)
+    IDWasper INT NOT NULL,
+    Privacy BOOLEAN NOT NULL,
+    PRIMARY KEY(NomeRaduno, IDWasper),
+    FOREIGN KEY(NomeRaduno) REFERENCES Raduno(NomeRaduno) ON DELETE CASCADE,
+    FOREIGN KEY(IDWasper) REFERENCES Wasper(IDWasper) ON DELETE CASCADE
 );
+
+
 
 
 
@@ -186,7 +168,3 @@ SELECT gadget.Nome, COUNT(IdGadget) AS totaleAcquistati FROM Acquisti
 INNER JOIN gadget USING(IDGadget)
 GROUP BY IDGadget
 ORDER BY totaleAcquistati DESC;
-
-#residenza wasper
-CREATE Procedure ResidenzaWasper(OUT INT IDWasper)
-SELECT

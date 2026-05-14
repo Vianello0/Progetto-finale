@@ -1,11 +1,10 @@
 <?php
-// include/acquisti.php - Gestione AJAX degli acquisti (carrello)
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-header('Content-Type: application/json');
+header('Content-Type: application/json'); //header per far capire al server che stiamo usando json
 
 // Assicurati che l'utente sia loggato
 if (!isset($_SESSION['IDWasper'])) {
@@ -15,9 +14,9 @@ if (!isset($_SESSION['IDWasper'])) {
 
 require_once 'DBHandler.php';
 
-$action = $_POST['action'] ?? '';
-$idRicambio = $_POST['idRicambio'] ?? 0;
-$idWasper = $_SESSION['IDWasper'];
+$action = $_POST['action'] ?? ''; //serve per capire cosa fare (aggiungere, rimuovere...)
+$idRicambio = $_POST['idRicambio'] ?? 0; //serve per capire quale ricambio modificare/rimuovere
+$idWasper = $_SESSION['IDWasper']; //serve per capire chi sta modificando/rimuovendo
 
 $db = DBHandler::getConnection();
 

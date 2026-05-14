@@ -42,7 +42,7 @@ body {
     gap: 10px;
 }
 
-.menu ul li a, .nopage {
+.menu ul li a {
     color: white;
     text-decoration: none;
     font-weight: 600;
@@ -56,25 +56,6 @@ body {
     background: rgba(255, 255, 255, 0.2);
 }
 
-/* SUBMENU */
-.has-submenu { position: relative; }
-
-.has-submenu .submenu{
-    display: none;
-}
-.submenu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: var(--bg-dark);
-    min-width: 180px;
-    padding: 10px 0;
-    border-radius: 0 0 8px 8px;
-    z-index: 1000;
-}
-.submenu li a { padding: 10px 20px; display: block; font-size: 15px; }
-.has-submenu:hover .submenu { display: block; }
 
 /* TASTI AZIONE */
 .header-actions {
@@ -121,11 +102,11 @@ body {
 .news-ticker p {
     display: inline-block;
     padding-left: 100%;
-    animation: marquee 25s linear infinite;
+    animation: transition 25s linear infinite; /*serve a far muovere il testo */
     margin: 0;
 }
 
-@keyframes marquee {
+@keyframes transition {
     0% { transform: translate(0, 0); }
     100% { transform: translate(-100%, 0); }
 }
@@ -137,7 +118,7 @@ a{
     font-family: Century Gothic;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px) { /* Serve a far adattare la pagina a diverse dimensioni */
     #main-header {
         height: auto;
         padding: 15px 0;

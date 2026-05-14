@@ -90,56 +90,6 @@ require_once '../header_footer/HeaderUser.php';
     </div>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const buyButtons = document.querySelectorAll('.btn-buy[data-id]');
-    
-    buyButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const idRicambio = this.getAttribute('data-id');
-            const originalText = this.textContent;
-            
-            // UI Feedback
-            this.textContent = 'Aggiungendo...';
-            this.disabled = true;
-            
-            const formData = new FormData();
-            formData.append('action', 'add');
-            formData.append('idRicambio', idRicambio);
-            
-            fetch('../include/acquisti.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    this.textContent = 'Aggiunto!';
-                    this.style.backgroundColor = 'var(--neon)';
-                    this.style.color = '#0d0d0f';
-                    
-                    setTimeout(() => {
-                        this.textContent = originalText;
-                        this.style.backgroundColor = 'transparent';
-                        this.style.color = 'var(--neon)';
-                        this.disabled = false;
-                    }, 2000);
-                } else {
-                    alert(data.message);
-                    this.textContent = originalText;
-                    this.disabled = false;
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Errore di connessione.');
-                this.textContent = originalText;
-                this.disabled = false;
-            });
-        });
-    });
-});
-</script>
-
+<script src="../JS/aggiungi.js"></script>
 </body>
 </html>

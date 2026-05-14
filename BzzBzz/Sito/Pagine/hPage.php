@@ -22,18 +22,18 @@ require_once '../header_footer/HeaderUser.php';
             </div>
         </a>
 
-        <a href="fotoRaduni.php" class="nav-card">
+        <a href="iscrizioneRad.php" class="nav-card">
             <div class="card-content">
-                <h2>FOTO RADUNI</h2>
+                <h2>ISCRIVITI AI RADUNI</h2>
             </div>
             <div class="slideshow-container">
-                <img src="../Img/Vespe/50special.jpg" alt="Foto Raduni">
+                <img src="../Img/Loghi/Raduni.jpg" alt="Foto Raduni">
             </div>
         </a>
 
-        <a href="gadgetShop.php" class="nav-card">
+        <a href="ShopRicambi.php" class="nav-card">
             <div class="card-content">
-                <h2>GADGET SHOP</h2>
+                <h2>SHOP RICAMBI</h2>
             </div>
             <div class="slideshow-container">
                 <img src="../Img/Vespe/pk125.jpg" alt="Gadget Shop">

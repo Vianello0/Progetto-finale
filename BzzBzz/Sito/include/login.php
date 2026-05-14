@@ -1,17 +1,14 @@
 <?php
-// include/login.php — Logica di autenticazione, da includere in loginForm.php
 
-declare(strict_types=1);
 
-require_once __DIR__ . '/../include/dbHandler.php';
+require_once '../include/dbHandler.php';
 
-// Avvio sessione (senza 'secure' per localhost HTTP)
 if (session_status() === PHP_SESSION_NONE) {
     session_set_cookie_params([
-        'lifetime' => 0,
-        'path'     => '/',
+        'lifetime' => 0,//chiude e distrugge il coockie appena viene chiuso il browser
+        'path'     => '/', //coockie valido in tutte le pagine interne al sito e non solo questa
         'httponly' => true,
-        'samesite' => 'Strict',
+        'samesite' => 'Strict', //mantiene il coockie solo nel sito corrente
     ]);
     session_start();
 }
@@ -24,11 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     return;
 }
 
-// ── Raccolta input (nomi campo in minuscolo come nel form) ──
-$mail       = trim($_POST['mail']       ?? '');
+//Raccolta input (nomi campo in minuscolo come nel form)
+$mail       = trim($_POST['mail']       ?? ''); //trim toglie gli spazi inutili
 $passwordUt = trim($_POST['passwordUt'] ?? '');
 
-// ── Validazione base ──
 if ($mail === '' || $passwordUt === '') {
     $error = 'Email e password sono obbligatorie.';
     return;
@@ -39,11 +35,11 @@ if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
     return;
 }
 
-// ── Verifica credenziali ──
+// Verifica credenziali
 try {
     $pdo  = DBHandler::getConnection();
     $stmt = $pdo->prepare(
-        'SELECT IDWasper, Nome, Cognome, Mail, PasswordUt, DataNascita
+        'SELECT IDWasper, Nome, Cognome, Mail, PasswordUt, DataNascita, admin
          FROM Wasper
          WHERE Mail = :mail
          LIMIT 1'
@@ -56,7 +52,7 @@ try {
         return;
     }
 
-    // ── Login riuscito: crea sessione e reindirizza ──
+    // Login riuscito: crea sessione e reindirizza 
     session_regenerate_id(true);
 
     $_SESSION['IDWasper']  = $wasper['IDWasper'];
@@ -64,9 +60,14 @@ try {
     $_SESSION['cognome']   = $wasper['Cognome'];
     $_SESSION['mail']      = $wasper['Mail'];
     $_SESSION['dataNascita']      = $wasper['DataNascita'];
+    $_SESSION['admin']     = $wasper['admin'] ? true : false;
     $_SESSION['loginTime'] = time();
 
-    header('Location: ../Pagine/hPage.php');
+    if ($_SESSION['admin']) {
+        header('Location: ../Pagine/admin pages/adminHPage.php');
+    } else {
+        header('Location: ../Pagine/hPage.php');
+    }
     exit;
 
 } catch (PDOException $e) {

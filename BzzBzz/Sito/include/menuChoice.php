@@ -1,38 +1,39 @@
 <?php
-// read pages.json into $json which is a string
-/*echo $_SERVER['PHP_SELF'];
-echo substr_count($_SERVER['PHP_SELF'], '/');
-if(substr_count($_SERVER['PHP_SELF'], '/') == 4){
-    echo 'dentro lo if!!!!';*/
-$json = file_get_contents('../include/pages.json');
 
-// get the name of the current page
+$json = file_get_contents(__DIR__ . '/pages.json');
+
+
 $pageName = basename($_SERVER['PHP_SELF']);
 
 $obj = json_decode($json);
 
 
 
-// in_array(el, arr) checks if el is in array arr
+// controlla che pagename sia dentro loggedInPages
 if(in_array($pageName, $obj->loggedInPages)){
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
     if (!isset($_SESSION['IDWasper'])) {
-        header("Location: loginForm.php");
+        header("Location: ../Pagine/loginForm.php");
         exit();
     }
     include '../header_footer/HeaderUser.php';
 }
 
 if(in_array($pageName, $obj->DBPages)){
-    require_once('../include/DBHandler.php');
+    require_once(__DIR__ . '/DBHandler.php');
 }
 
-if(in_array($pageName, $obj->userpages)){
+if(in_array($pageName, $obj->adminpages)){
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
+        header("Location: ../Pagine/hPage.php");
+        exit();
+    }
+    include '../header_footer/headerAdmin.php';
+}elseif(in_array($pageName, $obj->userpages)){
     include '../header_footer/HeaderUser.php';
-    // include ad.php;
-}elseif(in_array($pageName, $obj->adminpages)){
-    include '../include/adminMenu.php';
 }
-//}

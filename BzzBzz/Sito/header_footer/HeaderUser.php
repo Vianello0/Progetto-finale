@@ -1,11 +1,11 @@
 <?php
-// ← DEVE essere la prima riga assoluta del file
+// controlla  se è già avviata una session
 if (session_status() === PHP_SESSION_NONE) {
     session_set_cookie_params([
-        'lifetime' => 0,
-        'path'     => '/',
+        'lifetime' => 0,//chiude e distrugge il coockie appena viene chiuso il browser
+        'path'     => '/', //coockie valido in tutte le pagine interne al sito e non solo questa
         'httponly' => true,
-        'samesite' => 'Strict',
+        'samesite' => 'Strict', //mantiene il coockie solo nel sito corrente
     ]);
     session_start();
 }
@@ -29,20 +29,8 @@ if (session_status() === PHP_SESSION_NONE) {
             <ul>
                 <li><a href="hPage.php">HOME</a></li>
                 <li><a href="storia.php">STORIA</a></li>
-                <li class="has-submenu">
-                    <span class="nopage">SHOP</span>
-                    <ul class="submenu">
-                        <li><a href="ShopRicambi.php">Ricambi</a></li>
-                        <li><a href="gadgetShop.php">Abbigliamento</a></li>
-                    </ul>
-                </li>
-                <li class="has-submenu">
-                    <span class="nopage">RADUNI</span>
-                    <ul class="submenu">
-                        <li><a href="">Foto e Info</a></li>
-                        <li><a href="">Iscrizione</a></li>
-                    </ul>
-                </li>
+                <li><a href="ShopRicambi.php">SHOP</a></li>
+                <li><a href="iscrizioneRad.php">RADUNI</a></li>
             </ul>
         </nav>
         <nav>
@@ -62,6 +50,6 @@ if (session_status() === PHP_SESSION_NONE) {
 </header>
 
 <div class="news-ticker">
-    <p>Ultimi aggiornamenti: Prossimo raduno nazionale a Maggio 2026! Iscrizioni aperte dal 33 maggio. - Nuovo merchandising disponibile nello shop!</p>
+    <p>Per gli utenti registrati, riceveranno a casa lo splendido gadget BzzBzz.</p>
 </div>
 

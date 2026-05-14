@@ -1,0 +1,196 @@
+:root {
+    --bg:      #0d0d0f;
+    --surface: #16161a;
+    --border:  #2a2a30;
+    --neon:    #c8a96e;
+    --neon2:   #e8c98e;
+    --text:    #e8e6e0;
+    --text2:   #7a7870;
+    --radius:  12px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(ellipse 60% 50% at 20% 20%, rgba(200,169,110,.08) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(200,169,110,.05) 0%, transparent 60%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text);
+    box-sizing: border-box;
+    min-height: 100vh;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+.raduni-container {
+    display: flex;
+    justify-content: center;
+    padding: 4rem 1.5rem;
+}
+
+.raduni-main-card {
+    width: 100%;
+    max-width: 800px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) * 2);
+    padding: 3rem 2.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    animation: fadeUp .5s ease both;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.brand {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.brand h1 {
+    font-family: 'Century Gothic', 'Segoe UI', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: var(--text);
+    letter-spacing: -.01em;
+    margin: 0;
+}
+
+.subtitle {
+    font-size: 0.95rem;
+    color: var(--text2);
+    margin-top: 0.5rem;
+}
+
+.raduni-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.raduno-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: border-color 0.3s;
+}
+
+.raduno-card:hover {
+    border-color: rgba(200, 169, 110, 0.3);
+}
+
+.raduno-card h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--neon);
+    font-size: 1.5rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.raduno-info {
+    margin-bottom: 1rem;
+}
+
+.raduno-info p {
+    margin: 5px 0;
+    color: var(--text);
+}
+
+.raduno-info strong {
+    color: var(--text2);
+    font-weight: 600;
+}
+
+.raduno-desc {
+    color: var(--text2);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.raduno-form {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.privacy-label {
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.privacy-label input[type="checkbox"] {
+    margin-top: 4px;
+    accent-color: var(--neon);
+}
+
+.privacy-text {
+    font-size: 0.9em;
+    color: var(--text2);
+    line-height: 1.4;
+}
+
+.btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, var(--neon), var(--neon2));
+    color: #0d0d0f;
+    text-decoration: none;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+    text-align: center;
+    width: 100%;
+}
+
+.btn:hover {
+    opacity: 0.9;
+    box-shadow: 0 0 15px rgba(200, 169, 110, 0.4);
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+.alert {
+    padding: 15px;
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.alert.success {
+    background: rgba(46, 204, 113, 0.1);
+    color: #2ecc71;
+    border: 1px solid rgba(46, 204, 113, 0.2);
+}
+
+.alert.error {
+    background: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+    border: 1px solid rgba(231, 76, 60, 0.2);
+}
+
+.empty-message {
+    text-align: center;
+    color: var(--text2);
+    font-size: 1.1rem;
+    padding: 2rem;
+}

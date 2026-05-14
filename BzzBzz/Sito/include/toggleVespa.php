@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+//ricava i dati inviati dal form
 $input = json_decode(file_get_contents('php://input'), true);
 if (!$input || !isset($input['modello']) || !isset($input['checked'])) {
     echo json_encode(['success' => false, 'message' => 'Dati mancanti']);
