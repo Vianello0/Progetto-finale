@@ -27,7 +27,7 @@ require_once '../header_footer/HeaderUser.php';
                 <h2>ISCRIVITI AI RADUNI</h2>
             </div>
             <div class="slideshow-container">
-                <img src="../Img/Loghi/Raduni.jpg" alt="Foto Raduni">
+                <img src="../Img/Loghi/Raduni.jpg" alt="Raduni">
             </div>
         </a>
 
@@ -36,7 +36,7 @@ require_once '../header_footer/HeaderUser.php';
                 <h2>SHOP RICAMBI</h2>
             </div>
             <div class="slideshow-container">
-                <img src="../Img/Vespe/pk125.jpg" alt="Gadget Shop">
+                <img src="../Img/loghi/Shop.jpg" alt="Shop Ricambi">
             </div>
         </a>
     </div>
