@@ -1,5 +1,6 @@
 <?php
 require_once '../../include/DBHandler.php';
+require_once '../../include/menuChoice.php';
 
 $pdo = DBHandler::getConnection();
 

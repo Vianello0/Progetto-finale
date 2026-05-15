@@ -18,7 +18,7 @@ if(in_array($pageName, $obj->loggedInPages)){
         header("Location: ../Pagine/loginForm.php");
         exit();
     }
-    include '../header_footer/HeaderUser.php';
+    include __DIR__ . '/../header_footer/HeaderUser.php';
 }
 
 if(in_array($pageName, $obj->DBPages)){
@@ -33,7 +33,7 @@ if(in_array($pageName, $obj->adminpages)){
         header("Location: ../Pagine/hPage.php");
         exit();
     }
-    include '../header_footer/headerAdmin.php';
+    include __DIR__ . '/../header_footer/headerAdmin.php';
 }elseif(in_array($pageName, $obj->userpages)){
-    include '../header_footer/HeaderUser.php';
+    include __DIR__ . '/../header_footer/HeaderUser.php';
 }
